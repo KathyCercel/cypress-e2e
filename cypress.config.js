@@ -3,10 +3,14 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
-      // Example of implementing a custom event listener
       on('before:run', (details) => {
         console.log('Running tests with the following details:', details.browser);
+      });
+      on('task', {
+        log(message) {
+          console.log(message);
+          return null;
+        },
       });
     },
     baseUrl: 'https://www.saucedemo.com/',
@@ -15,7 +19,7 @@ module.exports = defineConfig({
     viewportWidth: 1280,
     viewportHeight: 720,
     retries: {
-      runMode: 2,
+      runMode: 0,
       openMode: 0,
     },
   },
