@@ -142,4 +142,4 @@ You can monitor test execution and results in the **GitHub Actions tab** of this
 - ✅ **Automated report generation & merging.**
 - ✅ **Final HTML report opens automatically.**
 - ✅ **Cypress setup is fully streamlined!**
-- ✅ **GitHub Actions! works as expected!!!**
+- ✅ **GitHub Actions! works as expected!!**
