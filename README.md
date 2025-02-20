@@ -28,6 +28,36 @@ We validated:
 ### ⚡ **Performance Testing**
 We tested application performance using **cypress-audit** for **Lighthouse analysis**.
 
+## 🏋️‍♂️ **Stress Testing with k6**
+To ensure the system can handle extreme loads, we perform **stress testing** using **k6**, a powerful load testing tool for APIs.
+
+### ✅ **Setting Up k6**
+- **Install k6** (if not installed):
+  ```sh
+  brew install k6
+
+```
+✓ is status 200
+     ✓ response time < 500ms
+
+     checks.........................: 100.00% 24406 out of 24406
+     data_received..................: 37 MB   728 kB/s
+     data_sent......................: 898 kB  18 kB/s
+     http_req_blocked...............: avg=3.36ms  min=0s      med=0s      max=306.51ms p(90)=1µs     p(95)=1µs    
+     http_req_connecting............: avg=1.42ms  min=0s      med=0s      max=50.92ms  p(90)=0s      p(95)=0s     
+     http_req_duration..............: avg=41.78ms min=22.82ms med=41.39ms max=235.07ms p(90)=49.56ms p(95)=52.15ms
+       { expected_response:true }...: avg=41.78ms min=22.82ms med=41.39ms max=235.07ms p(90)=49.56ms p(95)=52.15ms
+     http_req_failed................: 0.00%   0 out of 12203
+     http_req_receiving.............: avg=363.2µs min=14µs    med=282µs   max=10.98ms  p(90)=868µs   p(95)=1.13ms 
+     http_req_sending...............: avg=45.91µs min=16µs    med=38µs    max=3.62ms   p(90)=74µs    p(95)=87µs   
+     http_req_tls_handshaking.......: avg=1.93ms  min=0s      med=0s      max=265.48ms p(90)=0s      p(95)=0s     
+     http_req_waiting...............: avg=41.37ms min=22.26ms med=40.95ms max=234.38ms p(90)=49.19ms p(95)=51.78ms
+     http_reqs......................: 12203   239.146655/s
+     iteration_duration.............: avg=1.04s   min=1.02s   med=1.04s   max=1.35s    p(90)=1.05s   p(95)=1.06s  
+     iterations.....................: 12203   239.146655/s
+     vus............................: 7       min=7              max=499
+     vus_max........................: 500     min=500            max=500
+```
 ---
 
 ## 🔍 **Bug Identification Approach**
