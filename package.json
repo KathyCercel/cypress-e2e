@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "cypress:headless": "cypress run --browser chrome",
-    "cypress:open": "cypress open --browser electron"
+    "cypress:open": "cypress open --browser electron",
+    "cypress:lighthouse": "cypress run --spec cypress/e2e/lighthouse.cy.js --browser chrome"
   },
   "author": "Me",
   "license": "ISC",
@@ -13,6 +14,12 @@
     "npm": "^11.1.0"
   },
   "devDependencies": {
-    "cypress": "^14.0.3"
+    "chrome-launcher": "^1.1.2",
+    "cypress": "^14.0.3",
+    "cypress-audit": "^1.0.0",
+    "lighthouse": "^12.3.0"
+  },
+  "overrides": {
+    "lodash.set": "^4.3.2"
   }
 }
