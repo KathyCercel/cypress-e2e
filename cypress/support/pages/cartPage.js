@@ -13,4 +13,7 @@ export default {
     getItemQuantity: (index) => {
         return getElement('[data-test="item-quantity"]').eq(index);
     },
+    getRemoveAll: () => {
+        return getElement('[data-test^="remove-sauce-labs"]');
+    }
 };
