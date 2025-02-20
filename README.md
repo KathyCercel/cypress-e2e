@@ -126,8 +126,12 @@ All tests are automatically executed in **GitHub Actions** on every **push, pull
 - Artifacts (screenshots, videos, reports) are uploaded for debugging.
 
 ### ✅ **Automated k6 Stress Tests**
-- Runs Manually **stress tests using k6** to check system scalability.
+- Runs manually **stress tests using k6** to check system scalability.
 - Can execute **in parallel with Cypress** to validate UI stability under load.
+
+### ✅ **Automated Security Audit (`npm audit`)**
+- Scans for **security vulnerabilities** in dependencies.
+- The pipeline **fails if high+critical vulnerabilities exceed 10**.
 
 You can monitor test execution and results in the **GitHub Actions tab** of this repository.
 
