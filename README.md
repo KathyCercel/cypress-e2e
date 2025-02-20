@@ -34,8 +34,9 @@ We have deliberately tested edge cases, such as:
 - Adding/removing items from the cart (`POST /cart`)
 
 ### ⚡ **Performance Testing**
-- Conducted using **k6** to ensure stability under load.
-
+- Conducted using **cypress-audit** to the lighthouse performances
+```sh
+npm run cypress:lighthouse   # run performances coverage
 ---
 
 ## 🔍 **Bug Identification Approach**
@@ -75,5 +76,5 @@ All bugs are documented in [`bug-reports/`](./bug-reports/) with:
 ## 🚀 **How to Run Tests**
 ### **Run All Cypress Tests**
 ```sh
-npm run cypress open   # Open Cypress UI
-npm run cypress run    # Run headless mode
+npm run cypress:open   # Open Cypress UI
+npm run cypress:headless    # Run headless mode

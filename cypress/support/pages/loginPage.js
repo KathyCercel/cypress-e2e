@@ -8,8 +8,14 @@ export default {
   enterUsername: (username) => {
     getElement('[data-test="username"]').type(username);
   },
+  getUserNameSelector: () => {
+    return getElement('[data-test="username"]');
+  },
   enterPassword: (password) => {
     getElement('[data-test="password"]').type(password);
+  },
+  getPasswordSelector: () => {
+    return getElement('[data-test="password"]');
   },
   clickLoginButton: () => {
     getElement('[data-test="login-button"]').click();
