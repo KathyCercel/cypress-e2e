@@ -1,4 +1,4 @@
-import { loginPage } from '../support/pages/index';
+import { loginPage, menuButton, inventoryPage } from '../support/pages/index';
 
 describe('SauceDemo Login Tests', () => {
   beforeEach(() => {
@@ -44,5 +44,64 @@ describe('SauceDemo Login Tests', () => {
     loginPage.getErrorMessage()
       .should('be.visible')
       .and('contain', 'Epic sadface: Username is required');
+  });
+});
+
+describe('Session Handling Tests', () => {
+  beforeEach(() => {
+    loginPage.visit();
+    cy.loginUser('standard_user');
+    cy.url().should('include', '/inventory.html');
+    cy.get('.title').should('contain', 'Products');
+  });
+
+  it('should keep the user logged in when navigating between inventory pages', () => {
+    cy.url().should('include', '/inventory.html');
+    cy.get('.title').should('contain', 'Products');
+
+    cy.reload();
+    cy.url().should('include', '/inventory.html');
+    cy.get('.title').should('contain', 'Products');
+
+    cy.getCookies().should('not.be.empty');
+    cy.getCookie('session-username').should('exist');
+
+    cy.window().then((win) => {
+      cy.log('Local Storage:', win.localStorage);
+    });
+  });
+
+  it('should keep the user logged in when navigating between cart pages', () => {
+    cy.url().should('include', '/inventory.html');
+    cy.get('.title').should('contain', 'Products');
+
+    inventoryPage.getShoppingCartLink().click();
+    cy.url().should('include', '/cart.html');
+
+    cy.reload();
+
+    cy.url().should('include', '/cart.html');
+    
+    cy.get('.title').should('contain', 'Your Cart');
+
+    cy.getCookies().should('not.be.empty');
+    cy.getCookie('session-username').should('exist');
+
+    cy.window().then((win) => {
+      cy.log('Local Storage:', win.localStorage);
+    });
+  });
+
+  it('should log the user out when clicking the logout button', () => {
+
+    menuButton.getOpenMenu().click();
+    menuButton.getLogoutSidebarLink().click();
+
+    cy.url().should('eq', 'https://www.saucedemo.com/');
+
+    loginPage.getUserNameSelector().should('be.visible');
+
+    cy.reload();
+    cy.url().should('eq', 'https://www.saucedemo.com/');
   });
 });
