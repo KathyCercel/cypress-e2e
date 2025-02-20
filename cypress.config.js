@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const { lighthouse, prepareAudit } = require("cypress-audit");
 
 module.exports = defineConfig({
   e2e: {
@@ -22,6 +23,15 @@ module.exports = defineConfig({
           return null;
         },
       });
+      on('task', {
+        lighthouse: (options) => {
+          return lighthouse(options);
+        }
+      });
+      on('before:browser:launch', (browser = {}, launchOptions) => {
+        prepareAudit(launchOptions);
+      });
+      return config;
     },
     baseUrl: 'https://www.saucedemo.com/',
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
@@ -38,17 +48,15 @@ module.exports = defineConfig({
     requestTimeout: 10000,
     video: false,
     screenshotOnRunFailure: false,
-    // experimentalModifyObstructiveThirdPartyCode: false,
-    // watchForFileChanges: false
     screenshotOnRunFailure: true,
     modifyObstructiveCode: false,
     chromeWebSecurity: false,
-    experimentalSourceRewriting:false,
+    experimentalSourceRewriting: false,
     testIsolation: false,
     includeShadowDom: true,
     watchForFileChanges: false,
-    experimentalModifyObstructiveThirdPartyCode:true,
-    experimentalRunAllSpecs:true,
+    experimentalModifyObstructiveThirdPartyCode: true,
+    experimentalRunAllSpecs: true,
     experimentalCspAllowList: true,
     experimentalInteractiveRunEvents: true
   },
