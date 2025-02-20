@@ -1,0 +1,55 @@
+name: NPM Audit Check
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+  push:
+    branches:
+      - main
+      - develop
+  workflow_dispatch: # Allows manual execution
+
+jobs:
+  npm-audit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📂 Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Set Up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: 🔍 Run NPM Audit & Fail if High+Critical >10
+        run: |
+          audit_output=$(npm audit --json || true) # Run audit but prevent immediate failure
+          high_count=$(echo "$audit_output" | jq '.metadata.vulnerabilities.high')
+          critical_count=$(echo "$audit_output" | jq '.metadata.vulnerabilities.critical')
+          total_high_critical=$((high_count + critical_count))
+
+          echo "🔎 High vulnerabilities: $high_count"
+          echo "🚨 Critical vulnerabilities: $critical_count"
+          echo "⚠️ Total High+Critical: $total_high_critical"
+
+          if [ "$total_high_critical" -gt 10 ]; then
+            echo "❌ Too many high & critical vulnerabilities! ($total_high_critical found, max allowed: 10)"
+            exit 1
+          else
+            echo "✅ Security check passed ($total_high_critical high+critical vulnerabilities)"
+          fi
+        shell: bash
+
+      - name: 📤 Upload NPM Audit Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: npm-audit-report
+          path: npm-audit.json
+        if: always()
