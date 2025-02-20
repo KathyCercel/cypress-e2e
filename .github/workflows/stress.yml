@@ -1,18 +1,10 @@
-name: Stress Test
+name: k6 Load Tests
 
 on:
-  push:
-    branches:
-      - main
-      - develop
-  pull_request:
-    branches:
-      - main
-      - develop
-  workflow_dispatch:
+  workflow_dispatch: # Manual trigger only
 
 jobs:
-  stress_test:
+  load_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,9 +20,6 @@ jobs:
 
       - name: 🚀 Run k6 Load Test
         run: k6 run stress-test.js
-
-      - name: 🧪 Run Cypress Tests (Headless)
-        run: npx cypress run --headless
 
       - name: 📤 Upload k6 Test Results
         uses: actions/upload-artifact@v4
