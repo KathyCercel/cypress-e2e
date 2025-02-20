@@ -15,5 +15,14 @@ export default {
     },
     getRemoveAll: () => {
         return getElement('[data-test^="remove-sauce-labs"]');
-    }
+    },
+    cartList: () => {
+        return getElement('[data-test="cart-list"]')
+    },
+    cartTotal: () => {
+        return getElement('[data-test="cart-total"]')
+    },
+    removeFromCartButton: (itemName) => {
+        return getElement(`[data-test="remove-${itemName}"]`)
+    },
 };

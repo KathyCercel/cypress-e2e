@@ -1,11 +1,14 @@
 import { loginPage, cartPage, inventoryPage } from '../support/pages/index';
+import { removeItemWhileVisible } from "../support/cartUtils";
 
 describe('Shopping Cart Tests', () => {
     beforeEach(() => {
         loginPage.visit();
         cy.loginUser('standard_user');
-        cy.url().should('include', '/inventory.html');
+        cy.url().should('include', '/inventory');
         cy.get('.title').should('contain', 'Products');
+
+        removeItemWhileVisible(inventoryPage);
     });
 
     it('should add a single item to the cart and verify the cart count', () => {
@@ -26,5 +29,10 @@ describe('Shopping Cart Tests', () => {
 
         cartPage.getRemoveButton('sauce-labs-bolt-t-shirt').click();
         inventoryPage.getShoppingCartLink().should('have.text', '1');
+    });
+
+    it('should not show a remove button when cart is empty', () => {
+        inventoryPage.getShoppingCartLink().click();
+        cartPage.getRemoveButton(0).should('not.exist');
     });
 });
