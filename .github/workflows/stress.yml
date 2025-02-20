@@ -1,14 +1,14 @@
-name: Stress Test
-on: push
-jobs:
-  stress_test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
-      - name: Install k6
-        run: sudo apt install k6
-      - name: Run k6 Load Test
-        run: k6 run stress-test.js
-      - name: Run Cypress Tests
-        run: npx cypress run --headless
+stages:
+  - stress_test
+
+stress_test:
+  image: ubuntu:latest
+  stage: stress_test
+  before_script:
+    - apt-get update && apt-get install -y ca-certificates gnupg curl
+    - curl -fsSL https://dl.k6.io/key.gpg | gpg --dearmor > /usr/share/keyrings/k6-archive-keyring.gpg
+    - echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | tee /etc/apt/sources.list.d/k6.list
+    - apt-get update
+    - apt-get install -y k6
+  script:
+    - k6 run stress-test.js
