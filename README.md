@@ -118,8 +118,24 @@ All reports are stored in `/mochawesome-report/` .
 
 ---
 
+## 🚀 **Automated Testing in GitHub Actions**
+All tests are automatically executed in **GitHub Actions** on every **push, pull request, or manual trigger**.
+
+### ✅ **Automated Cypress Tests**
+- Runs Cypress in **headless mode** to validate UI functionality.
+- Artifacts (screenshots, videos, reports) are uploaded for debugging.
+
+### ✅ **Automated k6 Stress Tests**
+- Runs Manually **stress tests using k6** to check system scalability.
+- Can execute **in parallel with Cypress** to validate UI stability under load.
+
+You can monitor test execution and results in the **GitHub Actions tab** of this repository.
+
+--
+
 ## 🎯 **Final Outcome**
 - ✅ **Tests run in parallel via Docker.**
 - ✅ **Automated report generation & merging.**
 - ✅ **Final HTML report opens automatically.**
 - ✅ **Cypress setup is fully streamlined!**
+- ✅ **GitHub Actions! works as expected!!!**

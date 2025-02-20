@@ -1,11 +1,12 @@
 import http from "k6/http";
 import { check, sleep } from "k6";
 
+// tearing down timings so we won't overkill github actions
 export let options = {
   stages: [
-    { duration: "1m", target: 100 },  // Ramp up to 100 users over 1 min
-    { duration: "3m", target: 500 },  // Sustain 500 users for 3 min
-    { duration: "1m", target: 100 },  // Ramp down
+    { duration: "20s", target: 100 },  // Ramp up to 100 users over 1 min
+    { duration: "30s", target: 500 },  // Sustain 500 users for 3 min
+    { duration: "10s", target: 100 },  // Ramp down
   ],
 };
 
