@@ -1,14 +1,39 @@
-stages:
-  - stress_test
+name: Stress Test
 
-stress_test:
-  image: ubuntu:latest
-  stage: stress_test
-  before_script:
-    - apt-get update && apt-get install -y ca-certificates gnupg curl
-    - curl -fsSL https://dl.k6.io/key.gpg | gpg --dearmor > /usr/share/keyrings/k6-archive-keyring.gpg
-    - echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | tee /etc/apt/sources.list.d/k6.list
-    - apt-get update
-    - apt-get install -y k6
-  script:
-    - k6 run stress-test.js
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+  workflow_dispatch:
+
+jobs:
+  stress_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📂 Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: 🛠️ Install k6
+        run: |
+          sudo apt-get update && sudo apt-get install -y ca-certificates gnupg curl
+          curl -fsSL https://dl.k6.io/key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/k6-archive-keyring.gpg
+          echo "deb [signed-by=/usr/share/keyrings/k6-archive-keyring.gpg] https://dl.k6.io/deb stable main" | sudo tee /etc/apt/sources.list.d/k6.list
+          sudo apt-get update && sudo apt-get install -y k6
+
+      - name: 🚀 Run k6 Load Test
+        run: k6 run stress-test.js
+
+      - name: 🧪 Run Cypress Tests (Headless)
+        run: npx cypress run --headless
+
+      - name: 📤 Upload k6 Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: k6-results
+          path: k6-results/
