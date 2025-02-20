@@ -1,5 +1,5 @@
-import { inventoryPage, menuButton } from '../support/pages/index';
-import { loginPage } from '../support/pages/index';
+import { inventoryPage, menuButton, loginPage } from '../support/pages/index';
+import { removeItemWhileVisible } from "../support/cartUtils";
 
 describe('Menu Open and Close Navigation Tests', () => {
     beforeEach(() => {
@@ -16,7 +16,7 @@ describe('Menu Open and Close Navigation Tests', () => {
             .trigger('mouseover')
             .click();
 
-        menuButton.getInventorySidebarLink().should('be.visible');
+        menuButton.getAllItemsSidebarLink().should('be.visible');
         menuButton.getAboutSidebarLink().should('be.visible');
         menuButton.getLogoutSidebarLink().should('be.visible');
         menuButton.getResetSidebarLink().should('be.visible');
@@ -65,6 +65,8 @@ describe('Inventory Page Tests', () => {
     });
     
     it('should check the add to cart button for each item', () => {
+        removeItemWhileVisible(inventoryPage);
+
         inventoryPage.getInventoryItems().each((_, index) => {
             inventoryPage.getAddToCartButton(index)
                 .scrollIntoView()

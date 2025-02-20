@@ -4,7 +4,7 @@ export default {
   getOpenMenu: () => {
     return getElement('#react-burger-menu-btn');
   },
-  getInventorySidebarLink: () => {
+  getAllItemsSidebarLink: () => {
     return getElement('[data-test="inventory-sidebar-link"]');
   },
   getAboutSidebarLink: () => {

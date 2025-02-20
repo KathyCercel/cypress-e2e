@@ -29,9 +29,15 @@ We have deliberately tested edge cases, such as:
 - Handling missing or invalid API responses
 
 ### 📊 **API Testing**
-- Authentication API (`POST /api/login`)
-- Fetching inventory items (`GET /inventory`)
-- Adding/removing items from the cart (`POST /cart`)
+- Authentication API
+ * SauceDemo handles authentication entirely on the frontend using:
+ * - React state (`useState`)
+ * - `setCredentials(username, password)`
+ * - `verifyCredentials()`
+- Fetching inventory items
+- Adding/removing items from the cart
+  * - SauceDemo uses Local Storage to manage cart data instead of API calls. 
+  * - The key `cart-contents` stores an array of item IDs as a string
 
 ### ⚡ **Performance Testing**
 - Conducted using **cypress-audit** to the lighthouse performances
