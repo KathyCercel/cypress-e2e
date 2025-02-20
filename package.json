@@ -4,8 +4,8 @@
   "description": "cypress e2e",
   "main": "index.js",
   "scripts": {
-    "cypress:headless": "cypress run",
-    "cypress:open": "cypress open"
+    "cypress:headless": "cypress run --browser chrome",
+    "cypress:open": "cypress open --browser electron"
   },
   "author": "Me",
   "license": "ISC",
