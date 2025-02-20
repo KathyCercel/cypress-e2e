@@ -1,9 +1,40 @@
-node_modules
-dist
-dist-ssr
+# Node.js dependencies
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn.lock
 
-cypress/screnshots
-cypress/video
+# Cypress-related files
+cypress/videos/
+cypress/screenshots/
+cypress/downloads/
 cypress/reports/
-cypress/downloads
-cypress.env.json
+cypress/results/
+cypress/e2e/*.log
+
+# Mochawesome test reports (can be regenerated)
+mochawesome-report/
+mochawesome.json
+mochawesome.html
+mochawesome-report/*.json
+mochawesome-report/*.html
+mochawesome-report/assets/
+
+# Docker-related files
+docker-compose.override.yml
+docker-compose.logs
+*.log
+*.pid
+.DS_Store
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Editor & System files
+.idea/
+.vscode/
+*.swp
+*.swo
+Thumbs.db

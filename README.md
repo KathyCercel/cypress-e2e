@@ -9,78 +9,87 @@ This document outlines our test coverage approach for the SauceDemo application,
 
 ### ✅ **Functional Testing**
 We have tested the core functionality of the application, including:
-- **Authentication**
-  - Valid and invalid login scenarios
-  - Handling of locked-out users
-- **Inventory Page**
-  - Display of products, descriptions, and prices
-  - "Add to Cart" functionality
-- **Cart & Checkout**
-  - Adding/removing items
-  - Checkout flow validation
-- **Menu Navigation**
-  - Verifying all sidebar links
-  - Logout functionality
+- **Authentication** (valid/invalid login, locked-out users)
+- **Inventory Page** (product display, add-to-cart functionality)
+- **Cart & Checkout** (adding/removing items, checkout flow validation)
+- **Menu Navigation** (sidebar links, logout functionality)
 
 ### 🔥 **Negative Testing**
-We have deliberately tested edge cases, such as:
-- Logging in with incorrect credentials
-- Attempting actions on elements that should be disabled
-- Handling missing or invalid API responses
+We covered edge cases such as:
+- Incorrect login credentials
+- Actions on disabled elements
+- Handling invalid/missing API responses
 
 ### 📊 **API Testing**
-- Authentication API
- * SauceDemo handles authentication entirely on the frontend using:
- * - React state (`useState`)
- * - `setCredentials(username, password)`
- * - `verifyCredentials()`
-- Fetching inventory items
-- Adding/removing items from the cart
-  * - SauceDemo uses Local Storage to manage cart data instead of API calls. 
-  * - The key `cart-contents` stores an array of item IDs as a string
+We validated:
+- **Authentication:** Handled entirely on the frontend (`useState`, `setCredentials()`, `verifyCredentials()`).
+- **Inventory & Cart Management:** Uses **Local Storage (`cart-contents`)** instead of API calls.
 
 ### ⚡ **Performance Testing**
-- Conducted using **cypress-audit** to the lighthouse performances
-```sh
-npm run cypress:lighthouse   # run performances coverage
+We tested application performance using **cypress-audit** for **Lighthouse analysis**.
+
 ---
 
 ## 🔍 **Bug Identification Approach**
-We follow a systematic approach to identify and report bugs:
+Our systematic approach includes:
+- **Exploratory Testing** - Manually exploring the app for unexpected behaviors.
+- **Automated Failures Analysis** - Investigating Cypress test failures.
+- **Error Logs & Console Warnings** - Capturing browser dev tool issues.
+- **Regression Testing** - Running all tests after feature changes or bug fixes.
 
-1. **Exploratory Testing** - Manually interact with the application to find unexpected behaviors.
-2. **Automated Testing Failures** - Investigate Cypress test failures for inconsistencies.
-3. **Error Logs & Console Warnings** - Capture issues via browser dev tools.
-4. **Boundary Value Analysis** - Test limits (e.g., input lengths, large data loads).
-5. **Regression Testing** - Run all automated tests after each new feature or bug fix.
-
-All bugs are documented in [`bug-reports/`](./bug-reports/) with:
+Bugs are documented in [`cypress/bug-reports/`](./cypress/bug-reports/) with:
 - Steps to reproduce
-- Expected vs actual results
-- Severity and impact analysis
-- Suggested fixes
+- Expected vs actual behavior
+- Severity & suggested fixes
 
 ---
 
 ## 📝 **Test Writing Process**
-1. **Define Test Scenarios**
-   - Gather requirements from user stories and acceptance criteria.
-   - Identify both positive and negative test cases.
-
-2. **Create Page Objects**  
-   - Implement reusable locators in `/support/pages/`.
-   
-3. **Write Automated Tests**  
-   - Cypress tests are stored in `/cypress/e2e/`.
-   - Follow a **clear, structured format**:
-     - **Arrange**: Setup test state
-     - **Act**: Perform actions
-     - **Assert**: Verify expected behavior
+1. **Define Test Scenarios** based on user stories and acceptance criteria.
+2. **Use Page Objects** (`/support/pages/`) for reusable selectors.
+3. **Write Automated Tests** in `/cypress/e2e/`, following:
+   - **Arrange** - Set up test conditions.
+   - **Act** - Perform actions.
+   - **Assert** - Verify expected behavior.
 
 ---
 
 ## 🚀 **How to Run Tests**
-### **Run All Cypress Tests**
-```sh
-npm run cypress:open   # Open Cypress UI
-npm run cypress:headless    # Run headless mode
+### **Local Execution**
+- **Run Cypress UI:** `npm run cypress:open`
+- **Run Headless Mode:** `npm run cypress:headless`
+- **Run Lighthouse Performance Tests:** `npm run cypress:lighthouse`
+- **Run Cypress in parallel inside Docker containers:** `npm run cypress:docker:parallel`
+
+---
+
+## 🐳 **Running Cypress in Parallel via Docker**
+To ensure consistency and faster execution, we run **Cypress tests in parallel inside Docker containers**.
+
+### **Running Parallel Tests**
+- **Start parallel execution:** `./run-cypress-parallel.sh`
+- **Manually start Docker tests:** `docker-compose up --build --abort-on-container-exit`
+- **Stop & cleanup containers:** `docker-compose down`
+
+---
+
+## 📊 **Merging & Viewing Test Reports**
+Since Cypress runs in parallel, multiple JSON reports are generated. We **merge them into a single HTML report** using **Mochawesome**.
+
+### **Automatic Report Generation**
+- The `run-cypress-parallel.sh` script **automatically merges reports** and **opens the final HTML**.
+
+### **Manually Merging Reports**
+1. Merge JSON reports into **`merged-report.json`**.
+2. Generate the final HTML report.
+3. Open **`mochawesome-report/merged-report.html`**.
+
+All reports are stored in `/mochawesome-report/` .
+
+---
+
+## 🎯 **Final Outcome**
+- ✅ **Tests run in parallel via Docker.**
+- ✅ **Automated report generation & merging.**
+- ✅ **Final HTML report opens automatically.**
+- ✅ **Cypress setup is fully streamlined!**

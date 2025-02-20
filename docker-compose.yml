@@ -1,0 +1,45 @@
+services:
+  cypress-runner-1:
+    build: .
+    container_name: cypress-runner-1
+    volumes:
+      - .:/app
+    environment:
+      - CYPRESS_baseUrl=https://www.saucedemo.com
+    entrypoint: ["sh", "-c", "echo '🛠️ Running: Cypress - Cart Tests' && npm run cypress:run:cart"]
+
+  cypress-runner-2:
+    build: .
+    container_name: cypress-runner-2
+    volumes:
+      - .:/app
+    environment:
+      - CYPRESS_baseUrl=https://www.saucedemo.com
+    entrypoint: ["sh", "-c", "echo '🛠️ Running: Cypress - Inventory Tests' && npm run cypress:run:inventory"]
+
+  cypress-runner-3:
+    build: .
+    container_name: cypress-runner-3
+    volumes:
+      - .:/app
+    environment:
+      - CYPRESS_baseUrl=https://www.saucedemo.com
+    entrypoint: ["sh", "-c", "echo '🛠️ Running: Cypress - Login Tests' && npm run cypress:run:login"]
+
+  cypress-runner-4:
+    build: .
+    container_name: cypress-runner-4
+    volumes:
+      - .:/app
+    environment:
+      - CYPRESS_baseUrl=https://www.saucedemo.com
+    entrypoint: ["sh", "-c", "echo '🛠️ Running: Cypress - API Cart Tests' && npm run cypress:run:api-cart"]
+
+  cypress-runner-5:
+    build: .
+    container_name: cypress-runner-5
+    volumes:
+      - .:/app
+    environment:
+      - CYPRESS_baseUrl=https://www.saucedemo.com
+    entrypoint: ["sh", "-c", "echo '🛠️ Running: Cypress - Lighthouse Tests' && npm run cypress:run:lighthouse"]

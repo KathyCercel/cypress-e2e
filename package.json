@@ -6,7 +6,14 @@
   "scripts": {
     "cypress:headless": "cypress run --browser chrome",
     "cypress:open": "cypress open --browser electron",
-    "cypress:lighthouse": "cypress run --spec cypress/e2e/lighthouse.cy.js --browser chrome"
+    "cypress:lighthouse": "cypress run --spec cypress/e2e/lighthouse.cy.js --browser chrome",
+    "cypress:docker:parallel": "./run-cypress-parallel.sh",
+    
+    "cypress:run:cart": "npx cypress run --headless --spec cypress/e2e/cart.cy.js --reporter mochawesome --reporter-options reportFilename=cart-report",
+    "cypress:run:inventory": "npx cypress run --headless --spec cypress/e2e/inventory.cy.js --reporter mochawesome --reporter-options reportFilename=inventory-report",
+    "cypress:run:login": "npx cypress run --headless --spec cypress/e2e/login.cy.js --reporter mochawesome --reporter-options reportFilename=login-report",
+    "cypress:run:api-cart": "npx cypress run --headless --spec cypress/e2e/api-cart.cy.js --reporter mochawesome --reporter-options reportFilename=api-cart-report",
+    "cypress:run:lighthouse": "npx cypress run --headless --spec cypress/e2e/lighthouse.cy.js --reporter mochawesome --reporter-options reportFilename=lighthouse-report"
   },
   "author": "Me",
   "license": "ISC",
@@ -17,7 +24,9 @@
     "chrome-launcher": "^1.1.2",
     "cypress": "^14.0.3",
     "cypress-audit": "^1.0.0",
-    "lighthouse": "^12.3.0"
+    "lighthouse": "^12.3.0",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^5.0.0"
   },
   "overrides": {
     "lodash.set": "^4.3.2"
