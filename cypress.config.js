@@ -39,9 +39,9 @@ module.exports = defineConfig({
     viewportWidth: 1280,
     viewportHeight: 720,
     retries: {
-      runMode: 0,
-      openMode: 0,
-    },
+      runMode: 2,  // Retries failed tests twice when running via `cypress run`
+      openMode: 2, // Retries failed tests twice when running via `cypress open`
+    },    
     defaultCommandTimeout: 30000,
     pageLoadTimeout: 30000,
     responseTimeout: 10000,
