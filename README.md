@@ -1,35 +1,35 @@
 # Test Coverage Strategy
 
 ## 📖 Overview
-This document outlines our test coverage approach for the SauceDemo application, detailing how we designed our tests, identified bugs, and ensured a robust automation framework.
+This document outlines our test coverage approach for the SauceDemo application, detailing how I designed our tests, identified bugs, and ensured a robust automation framework.
 
 ---
 
 ## 🧪 **Testing Scope**
 
 ### ✅ **Functional Testing**
-We have tested the core functionality of the application, including:
+I have tested the core functionality of the application, including:
 - **Authentication** (valid/invalid login, locked-out users)
 - **Inventory Page** (product display, add-to-cart functionality)
 - **Cart & Checkout** (adding/removing items, checkout flow validation)
 - **Menu Navigation** (sidebar links, logout functionality)
 
 ### 🔥 **Negative Testing**
-We covered edge cases such as:
+I covered edge cases such as:
 - Incorrect login credentials
 - Actions on disabled elements
 - Handling invalid/missing API responses
 
 ### 📊 **API Testing**
-We validated:
+I validated:
 - **Authentication:** Handled entirely on the frontend (`useState`, `setCredentials()`, `verifyCredentials()`).
 - **Inventory & Cart Management:** Uses **Local Storage (`cart-contents`)** instead of API calls.
 
 ### ⚡ **Performance Testing**
-We tested application performance using **cypress-audit** for **Lighthouse analysis**.
+I tested application performance using **cypress-audit** for **Lighthouse analysis**.
 
 ## 🏋️‍♂️ **Stress Testing with k6**
-To ensure the system can handle extreme loads, we perform **stress testing** using **k6**, a powerful load testing tool for APIs.
+To ensure the system can handle extreme loads, I perform **stress testing** using **k6**, a powerful load testing tool for APIs.
 
 ### ✅ **Setting Up k6**
 - **Install k6** (if not installed):
@@ -94,7 +94,7 @@ Bugs are documented in [`cypress/bug-reports/`](./cypress/bug-reports/) with:
 ---
 
 ## 🐳 **Running Cypress in Parallel via Docker**
-To ensure consistency and faster execution, we run **Cypress tests in parallel inside Docker containers**.
+To ensure consistency and faster execution, I run **Cypress tests in parallel inside Docker containers**.
 
 ### **Running Parallel Tests**
 - **Start parallel execution:** `./run-cypress-parallel.sh`
@@ -104,7 +104,7 @@ To ensure consistency and faster execution, we run **Cypress tests in parallel i
 ---
 
 ## 📊 **Merging & Viewing Test Reports**
-Since Cypress runs in parallel, multiple JSON reports are generated. We **merge them into a single HTML report** using **Mochawesome**.
+Since Cypress runs in parallel, multiple JSON reports are generated. I **merge them into a single HTML report** using **Mochawesome**.
 
 ### **Automatic Report Generation**
 - The `run-cypress-parallel.sh` script **automatically merges reports** and **opens the final HTML**.
