@@ -19,7 +19,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y k6
 
       - name: 🚀 Run k6 Load Test
-        run: k6 run stress-test.js
+        run: k6 run load-test.js
 
       - name: 📤 Upload k6 Test Results
         uses: actions/upload-artifact@v4

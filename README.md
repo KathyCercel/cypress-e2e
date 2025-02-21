@@ -28,8 +28,8 @@ I validated:
 ### ⚡ **Performance Testing**
 I tested application performance using **cypress-audit** for **Lighthouse analysis**.
 
-## 🏋️‍♂️ **Stress Testing with k6**
-To ensure the system can handle extreme loads, I perform **stress testing** using **k6**, a powerful load testing tool for APIs.
+## 🏋️‍♂️ **Load Testing with k6**
+To ensure the system can handle extreme loads, I perform **load testing** using **k6**, a powerful load testing tool for APIs.
 
 ### ✅ **Setting Up k6**
 - **Install k6** (if not installed):
@@ -125,8 +125,8 @@ All tests are automatically executed in **GitHub Actions** on every **push, pull
 - Runs Cypress in **headless mode** to validate UI functionality.
 - Artifacts (screenshots, videos, reports) are uploaded for debugging.
 
-### ✅ **Automated k6 Stress Tests**
-- Runs manually **stress tests using k6** to check system scalability.
+### ✅ **Automated k6 Load Tests**
+- Runs manually **Load tests using k6** to check system scalability.
 - Can execute **in parallel with Cypress** to validate UI stability under load.
 
 ### ✅ **Automated Security Audit (`npm audit`)**

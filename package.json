@@ -8,7 +8,7 @@
     "cypress:open": "cypress open --browser electron",
     "cypress:lighthouse": "cypress run --spec cypress/e2e/lighthouse.cy.js --browser chrome",
     "cypress:docker:parallel": "./run-cypress-parallel.sh",
-    "stress:k6": "k6 run stress-test.js",
+    "loadtest:k6": "k6 run load-test.js",
 
     "cypress:run:cart": "npx cypress run --headless --spec cypress/e2e/cart.cy.js --reporter mochawesome --reporter-options reportFilename=cart-report",
     "cypress:run:inventory": "npx cypress run --headless --spec cypress/e2e/inventory.cy.js --reporter mochawesome --reporter-options reportFilename=inventory-report",
